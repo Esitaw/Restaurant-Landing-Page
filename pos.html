@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Baka Naman POS System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #fefefe;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: #a52a2a;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      margin-top: 60px;
+    }
+
+    .menu, .cart {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .menu {
+      flex: 2;
+      background: #fff;
+      border-right: 1px solid #eee;
+    }
+
+    .cart {
+      flex: 1;
+      background: #f9f9f9;
+    }
+
+    .menu h2, .cart h2 {
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+
+    .menu-item span {
+      font-weight: 600;
+    }
+
+    .menu-item input[type="number"] {
+      width: 60px;
+    }
+
+    .menu-item button {
+      padding: 5px 10px;
+      background-color: #a52a2a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .menu-item button:hover {
+      background-color: #7d1f1f;
+    }
+
+    .cart-items {
+      margin-top: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .checkout-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #a52a2a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background: #7d1f1f;
+    }
+
+    input[type="number"] {
+      padding: 5px;
+    }
+
+    .remove-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 2px 5px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>Baka Naman POS System</header>
+
+<div class="container">
+  <div class="menu">
+    <h2>Menu</h2>
+
+    <!-- Each menu item has its own unique quantity input -->
+    <div class="menu-item">
+      <img src="assets2/ribeye.jpg" alt="Ribeye">
+      <span>Premium Ribeye - ₱250</span>
+      <input type="number" id="qty-ribeye" value="1" min="1">
+      <button onclick="addToCart('Premium Ribeye', 250, 'qty-ribeye')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/bistek.jpg" alt="Bistek">
+      <span>Bistek Steak - ₱200</span>
+      <input type="number" id="qty-bistek" value="1" min="1">
+      <button onclick="addToCart('Bistek Steak', 200, 'qty-bistek')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/pares.jpg" alt="Pares">
+      <span>Pares Platter - ₱180</span>
+      <input type="number" id="qty-pares" value="1" min="1">
+      <button onclick="addToCart('Pares Platter', 180, 'qty-pares')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/tbone.jpg" alt="T-Bone">
+      <span>T-Bone Classic - ₱260</span>
+      <input type="number" id="qty-tbone" value="1" min="1">
+      <button onclick="addToCart('T-Bone Classic', 260, 'qty-tbone')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/sliders.jpg" alt="Sliders">
+      <span>Steak Sliders - ₱170</span>
+      <input type="number" id="qty-sliders" value="1" min="1">
+      <button onclick="addToCart('Steak Sliders', 170, 'qty-sliders')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/bowl.jpg" alt="Bowl">
+      <span>Steak Rice Bowl - ₱150</span>
+      <input type="number" id="qty-bowl" value="1" min="1">
+      <button onclick="addToCart('Steak Rice Bowl', 150, 'qty-bowl')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/nachos.jpg" alt="Nachos">
+      <span>Steak Nachos - ₱190</span>
+      <input type="number" id="qty-nachos" value="1" min="1">
+      <button onclick="addToCart('Steak Nachos', 190, 'qty-nachos')">Add</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="assets2/fries.jpg" alt="Fries">
+      <span>Steak & Fries - ₱230</span>
+      <input type="number" id="qty-fries" value="1" min="1">
+      <button onclick="addToCart('Steak & Fries', 230, 'qty-fries')">Add</button>
+    </div>
+  </div>
+
+  <div class="cart">
+    <h2>Order List</h2>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="total" id="total">Total: ₱0</div>
+
+    <div>
+      <label for="amountPaid">Amount Paid: ₱</label>
+      <input type="number" id="amountPaid" min="0">
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<script>
+  let cart = [];
+  let total = 0;
+
+  function addToCart(item, price, qtyInputId) {
+    const qty = parseInt(document.getElementById(qtyInputId).value);
+    if (isNaN(qty) || qty <= 0) {
+      alert("Please enter a valid quantity.");
+      return;
+    }
+
+    cart.push({ name: item, price: price, quantity: qty });
+    total += price * qty;
+    renderCart();
+  }
+
+  function renderCart() {
+    const cartContainer = document.getElementById("cartItems");
+    const totalDisplay = document.getElementById("total");
+    cartContainer.innerHTML = "";
+
+    cart.forEach((c, index) => {
+      const itemTotal = c.price * c.quantity;
+      const div = document.createElement("div");
+      div.classList.add("cart-item");
+      div.innerHTML = `
+        <span>${c.name} x${c.quantity}</span>
+        <span>₱${itemTotal}</span>
+        <button class="remove-btn" onclick="removeItem(${index})">X</button>
+      `;
+      cartContainer.appendChild(div);
+    });
+
+    totalDisplay.innerText = `Total: ₱${total}`;
+  }
+
+  function removeItem(index) {
+    total -= cart[index].price * cart[index].quantity;
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    const amountPaid = parseFloat(document.getElementById("amountPaid").value);
+    if (isNaN(amountPaid) || amountPaid < total) {
+      alert("Not enough balance (must be equal to or more than ₱" + total + ")");
+      return;
+    }
+
+    const change = amountPaid - total;
+    alert(`Thank you for your order!\nTotal: ₱${total}\nPaid: ₱${amountPaid}\nChange: ₱${change}`);
+
+    cart = [];
+    total = 0;
+    document.getElementById("amountPaid").value = '';
+    renderCart();
+  }
+</script>
+
+</body>
+</html>
